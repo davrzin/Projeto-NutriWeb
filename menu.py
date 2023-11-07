@@ -12,7 +12,6 @@ def menu(): #Abre o menu
         print("Opção Inválida")
 
 def carregar_usuarios(): #Carrega os dados do usuários
-
     usuarios_dict = {}
 
     try:
@@ -38,6 +37,26 @@ def carregar_usuarios(): #Carrega os dados do usuários
 
     return usuarios_dict
 
+def cadastro():#Cadastra o Usuário
+    usuarios = carregar_usuarios()
+
+    email = input("Digite um email: ")
+    senha = gp.getpass("Crie uma Senha: ")
+    nome = input("Digite seu Nome: ")
+    sexo = input("Digite seu Sexo: ")
+    idade = int(input("Digite sua Idade: "))
+    peso = float(input("Digite seu Peso: "))
+    altura = float(input("Digite sua Altura: "))
+    objetivo = input("Digite seu Objetivo: ")
+
+    if email in usuarios:
+        print("Email já cadastrado.")
+    else:
+        with open("usuarios.txt", "a") as arquivo:
+            usuario = f"Email: {email}\nSenha: {senha}\nNome: {nome}\nSexo: {sexo}\nIdade: {idade}\nPeso: {peso}\nAltura: {altura}\nObjetivo: {objetivo}\n\n"
+            arquivo.write(usuario)
+            print("Cadastro Efetuado!")
+
 def login(): #Faz o Login
     usuarios = carregar_usuarios()
 
@@ -55,8 +74,6 @@ def login(): #Faz o Login
             print("Senha incorreta.")
     else:
         print("Email não encontrado.")
-
-
 
 def EscolhaMenu():#Excução do programa
     escolha = menu()
